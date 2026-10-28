@@ -58,12 +58,8 @@ The following settings show how SSO should be configured.
 
 Creating an **App Registration** in Microsoft Entra synchronizes the Identity Provider (IdP) with our organizational Jamf Account.
 
-For Microsoft's Entra configuration, refer to:
+For Microsoft's Entra configuration, refer to: [Configuring Microsoft Entra ID for SSO Integration with Jamf Account](https://learn.jamf.com/r/en-US/jamf-account-documentation/Microsoft_Entra_ID)
 
-[Configuring Microsoft Entra ID for SSO Integration with Jamf Account](https://learn.jamf.com/r/en-US/jamf-account-documentation/Microsoft_Entra_ID)
-
-<!-- Screenshot: Jamf Account application/domain configuration -->
-![Entra integration configuration](images/entra-integration.png)
 
 ### Enterprise App Registration
 
@@ -71,21 +67,21 @@ An Enterprise App Registration establishes the **OIDC-based connection**.
 
 API permissions should be configured as shown below:
 
-<!-- Screenshot: Entra API permissions -->
-![Microsoft Entra API permissions](images/entra-api-permissions.png)
+<img width="1599" height="806" alt="image" src="https://github.com/user-attachments/assets/03f7c461-7704-43c0-aa45-fedebfc0e726" />
+
+
 
 ### Token Configuration
 
 The following claims must be configured under **Token configuration** for the App Registration.
 
-<!-- Screenshot: Entra token configuration -->
-![Microsoft Entra token configuration](images/entra-token-configuration.png)
+<img width="1233" height="841" alt="image" src="https://github.com/user-attachments/assets/b398dfcf-1c3a-4c27-997c-36934bc1dd87" />
 
 > **Important**
 >
 > The `upn` (`userPrincipalName`) claim is specific to our environment.
 >
-> This allows administrative accounts, such as `AD` or `EP` accounts, to log in to Jamf Pro even though these accounts do not have an email attribute because they are not mail-enabled.
+> This allows administrative accounts to log in to Jamf Pro even though these accounts do not have an email attribute because they are not mail-enabled.
 >
 > This setting directly corresponds to **Custom username claim name** in the Jamf Account configuration described in [Step 1](#1-jamf-account-online-jamf-id).
 
@@ -93,7 +89,34 @@ The following claims must be configured under **Token configuration** for the Ap
 
 ## 3. Jamf Pro
 
-**Jamf Pro URL**
+`exmaple.jamfpro.com`
 
-```text
-company.jamfcloud.com
+The following settings must be configured in Jamf:
+> **Important**
+>
+> **Username** is selected for Identity Provider User Mapping because admin accounts without an email cannot be mapped from Entra to Jamf Pro user accounts otherwise. If IdP User Mapping is set to **Email**, only mail-enabled accounts can login.
+>
+> **Email** is selected for Jamf Pro User Mapping so that user mappings are not dependent on Usernames for Jamf admin accounts (Jamf Pro > Settings > Users). In other words, Jamf admin accounts do not need to have @example.com in their username field.
+
+<img width="1081" height="992" alt="image" src="https://github.com/user-attachments/assets/1285c58a-a948-4944-babe-503dd80d60da" />
+
+### Creating Admin Accounts in Jamf Pro
+
+Navigate to Jamf Pro > Settings > User Accounts > New > Create Federated Account
+
+<img width="921" height="598" alt="image" src="https://github.com/user-attachments/assets/1712fde1-dc20-42a1-b8c8-879070d45947" />
+
+Fill in the user's information then click Save
+
+- **Username:** can be anything but set it to the user's IdP display name for predictability and consistency
+- **Privilege Set:**
+    - Administrator - grants all privileges
+    - Auditor - grants all read privileges 
+    - Enrollment Only - Grants all privileges required to enroll computers and mobile devices
+    - Custom - Requires you to grant privileges manually in the Privileges tab
+
+ <img width="874" height="758" alt="image" src="https://github.com/user-attachments/assets/385bac95-fd2b-4fdb-8c96-2d4442bc0ffb" />
+
+ 
+
+
