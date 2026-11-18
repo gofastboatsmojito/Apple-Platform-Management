@@ -191,3 +191,4 @@ This payload is needed within the Platform SSO Configuration Profile specificall
 ### 2. Create a separate PreStage profile in Jamf Pro for Platform SSO
 > **Important:** Devices assigned to this pre-stage will register with PSSO during the setup process (out-of-box experience or after factory reset)
 
+*to be continued...*
