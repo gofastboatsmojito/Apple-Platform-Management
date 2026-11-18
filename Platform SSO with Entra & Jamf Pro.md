@@ -7,6 +7,7 @@ Platform SSO is a framework built into computers with macOS 13 or later that pro
 - Create a secure, hardware bound non-phishable authentication factor to securely access organization resources
 - Automatic sign-in to Microsoft apps like Outlook, Teams, OneDrive, etc.
 
+<img width="631" height="453" alt="image" src="https://github.com/user-attachments/assets/aa99d5c1-4410-4fb1-9ec4-452fb209447a" />
 
 ## Jamf Configuration
 
@@ -169,3 +170,24 @@ The attribute mapping used when creating new users or performing authorization.
     <false/>
 </dict>
 </plist>
+```
+
+---
+## Associated Domains
+
+This payload is needed within the Platform SSO Configuration Profile specifically when using Simplified Setup for Platform SSO in PreStage enrollments, but [do not enter any values in the App Identifier and Associated Domain fields](https://learn.jamf.com/r/en-US/jamf-school-documentation/Configuring_a_Platform_SSO_Profile_for_Computers_Microsoft_Entra_ID)
+<img width="918" height="417" alt="image" src="https://github.com/user-attachments/assets/502fdc20-3d9b-44cb-8865-91ef0363092b" />
+
+---
+
+
+## Platform SSO PreStage with Simplified Setup
+
+### 1. Upload the latest version of Company Portal to Jamf Pro > Settings > Packages
+- Company Portal .pkg: https://go.microsoft.com/fwlink/?linkid=853070
+
+---
+
+### 2. Create a separate PreStage profile in Jamf Pro for Platform SSO
+> **Important:** Devices assigned to this pre-stage will register with PSSO during the setup process (out-of-box experience or after factory reset)
+
